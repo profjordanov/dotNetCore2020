@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<root>
+  <item name="development">
+    <items>
+      <item name="project1">
+        <items>
+          <item name="p1f1.txt" fileBytes="2100"/>
+          <item name="p1f2.txt" fileBytes="3100"/>
+          <item name="sub-dir">
+            <item name="p1f3.txt" fileBytes="4100"/>
+            <item name="p1f4.txt" fileBytes="5100"/>
+          </item>
+        </items>
+      </item>
+      <item name="project2">
+        <items>
+          <item name="p2f1.txt" fileBytes="6100"/>
+          <item name="p2f1.txt" fileBytes="7100"/>
+        </items>
+      </item>
+    </items>
+  </item>
+</root>
