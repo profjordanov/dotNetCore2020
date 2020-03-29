@@ -1,0 +1,68 @@
+﻿@model DataWrapper.Samples.ViewModelLayer.ProductDataSetViewModel
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Dynamic SQL (DataSet)";
+}
+
+<h1>Get Product Data Using Dynamic SQL (DataSet)</h1>
+
+@if (!string.IsNullOrEmpty(Model.ResultText)) {
+  <div class="row">
+    <div class="col-sm-12">
+      @Model.ResultText
+    </div>
+  </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.LastExceptionMessage)) {
+  <div class="row">
+    <div class="col-sm-12">
+      @Model.LastExceptionMessage
+    </div>
+  </div>
+}
+
+@using (Html.BeginForm()) {
+  @Html.HiddenFor(m => m.EventAction)
+  @Html.HiddenFor(m => m.EventValue)
+
+  @Html.Partial("_ProductSearch")
+
+  <div class="well well-sm">
+    <button class="btn btn-sm btn-primary"
+            data-pdsa-action="getall">
+      Get All
+    </button>
+    <button class="btn btn-sm btn-primary"
+            data-pdsa-action="get" data-pdsa-value="680">
+      Get
+    </button>
+    <button class="btn btn-sm btn-primary"
+            data-pdsa-action="search">
+      Search
+    </button>
+    <button class="btn btn-sm btn-primary"
+            data-pdsa-action="multipleresults">
+      Multiple Result Sets
+    </button>
+    <button class="btn btn-sm btn-primary"
+            data-pdsa-action="resetsearch">
+      Reset
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      @if (Model.RowsAffected > 0) {
+        <p>Total Count: @Model.RowsAffected</p>
+      }
+    </div>
+  </div>
+
+  @Html.Partial("_ProductList")
+}
+
+@section scripts {
+  <script src="~/Scripts/pdsa-common.js"></script>
+}

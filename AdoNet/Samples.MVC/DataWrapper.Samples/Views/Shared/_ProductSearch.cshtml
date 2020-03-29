@@ -1,0 +1,27 @@
+﻿@model DataWrapper.Samples.ViewModelLayer.ProductViewModelBase
+
+<!-- ** BEGIN SEARCH AREA ** -->
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title">Search for Products</h1>
+  </div>
+  <div class="panel-body">
+    <div class="form-group">
+      @Html.LabelFor(m => m.SearchEntity.Name, "Product Name")
+      @Html.TextBoxFor(m => m.SearchEntity.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.SearchEntity.ProductNumber, "Product Number")
+      @Html.TextBoxFor(m => m.SearchEntity.ProductNumber, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.SearchEntity.BeginningCost, "Cost From")
+      @Html.TextBoxFor(m => m.SearchEntity.BeginningCost, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.SearchEntity.EndingCost, "Cost To")
+      @Html.TextBoxFor(m => m.SearchEntity.EndingCost, new { @class = "form-control" })
+    </div>
+  </div>  
+</div>
+<!-- ** END SEARCH AREA ** -->

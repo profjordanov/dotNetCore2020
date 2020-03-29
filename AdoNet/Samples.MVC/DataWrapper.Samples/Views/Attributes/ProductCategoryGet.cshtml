@@ -1,0 +1,68 @@
+﻿@model DataWrapper.Samples.ViewModelLayer.ProductCategoryViewModel
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Attributes (DataReader)";
+}
+
+<h1>Get Category Data Using Attributes (DataReader)</h1>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p id="resultText"></p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <p id="errorMsg"></p>
+  </div>
+</div>
+
+@using (Html.BeginForm()) {
+  @Html.HiddenFor(m => m.EventAction)
+  @Html.HiddenFor(m => m.EventValue)
+
+  <div class="well well-sm">
+    <button class="btn btn-sm btn-primary"
+            data-pdsa-action="getall">
+      <i class="glyphicon glyphicon-search"></i>
+      &nbsp;Get All
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      @if (Model.RowsAffected > 0) {
+        <p>Total Count: @Model.RowsAffected</p>
+      }
+    </div>
+  </div>
+
+  if (Model.DataCollection.Count > 0) {
+    <!-- ** BEGIN LIST AREA ** -->
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Category ID</th>
+          <th>Category Name</th>
+          <th>Modified Date</th>
+        </tr>
+      </thead>
+      @foreach (var category in Model.DataCollection) {
+        <tbody>
+          <tr>
+            <td>@category.Id</td>
+            <td>@category.CategoryName</td>
+            <td>@category.ModifiedDate</td>
+          </tr>
+        </tbody>
+      }
+    </table>
+    <!-- ** END LIST AREA ** -->
+  }
+}
+
+@section scripts {
+  <script src="~/Scripts/pdsa-common.js"></script>
+}

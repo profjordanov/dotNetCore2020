@@ -1,0 +1,325 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WPF.Common">
+  <!-- ******************************* -->
+  <!-- Converters -->
+  <!-- ******************************* -->
+  <BooleanToVisibilityConverter x:Key="visibilityConverter" />
+  <!-- *********************************** -->
+  <!-- Drop Shadow for Buttons -->
+  <!-- *********************************** -->
+  <DropShadowEffect x:Key="buttonShadow"
+                    Color="Gray"
+                    ShadowDepth="4" />
+  <!-- *********************************** -->
+  <!-- Drop Shadow for User Controls -->
+  <!-- *********************************** -->
+  <DropShadowEffect x:Key="screenShadow"
+                    Color="Gray"
+                    BlurRadius="5"
+                    ShadowDepth="8" />
+  <!-- *********************************** -->
+  <!-- Gradient Brush for Grid Background -->
+  <!-- *********************************** -->
+  <LinearGradientBrush StartPoint="0.5,0"
+                       EndPoint="0.5,1"
+                       x:Key="gridBackgroundColor">
+    <GradientStop Color="Gray"
+                  Offset="0" />
+    <GradientStop Color="DarkGray"
+                  Offset="1" />
+  </LinearGradientBrush>
+  <!-- *************** -->
+  <!-- Main Grid Style -->
+  <!-- *************** -->
+  <Style TargetType="Grid"
+         x:Key="gridMainStyle">
+    <Setter Property="Background"
+            Value="{StaticResource gridBackgroundColor}" />
+  </Style>
+  <!-- ****************************************** -->
+  <!-- Gradient Brush for User Control Background -->
+  <!-- ****************************************** -->
+  <LinearGradientBrush StartPoint="0.5,0"
+                       EndPoint="0.5,1"
+                       x:Key="screenBackgroundColor">
+    <GradientStop Color="DarkGray"
+                  Offset="0" />
+    <GradientStop Color="Gray"
+                  Offset="1" />
+  </LinearGradientBrush>
+  <!-- ************************** -->
+  <!-- User Control Overall Style -->
+  <!-- ************************** -->
+  <Style TargetType="UserControl"
+         x:Key="screenStyle">
+    <Setter Property="MinWidth"
+            Value="600" />
+    <Setter Property="Effect"
+            Value="{StaticResource screenShadow}" />
+    <!-- Animate Opacity -->
+    <Style.Triggers>
+      <EventTrigger RoutedEvent="Loaded">
+        <BeginStoryboard>
+          <Storyboard>
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             From="0"
+                             To="1"
+                             Duration="00:00:00.4" />
+          </Storyboard>
+        </BeginStoryboard>
+      </EventTrigger>
+    </Style.Triggers>
+  </Style>
+  <!-- ******************************** -->
+  <!-- User Control Screen Border Style -->
+  <!-- ******************************** -->
+  <Style TargetType="Border"
+         x:Key="screenBorder">
+    <Setter Property="Background"
+            Value="{StaticResource screenBackgroundColor}" />
+    <Setter Property="BorderBrush"
+            Value="#FF5F5F5F" />
+    <Setter Property="CornerRadius"
+            Value="10" />
+    <Setter Property="BorderThickness"
+            Value="1" />
+    <Setter Property="Padding"
+            Value="12" />
+    <Setter Property="Margin"
+            Value="16" />
+  </Style>
+  <!-- ********************************* -->
+  <!-- Global Styles for "Control" types -->
+  <!-- ********************************* -->
+  <Style TargetType="Control"
+         x:Key="baseControl">
+    <Setter Property="Margin"
+            Value="4" />
+    <Setter Property="Padding"
+            Value="4" />
+  </Style>
+  <Style TargetType="Button"
+         BasedOn="{StaticResource baseControl}">
+  </Style>
+  <Style TargetType="TextBox"
+         BasedOn="{StaticResource baseControl}">
+  </Style>
+  <Style TargetType="PasswordBox"
+         BasedOn="{StaticResource baseControl}">
+  </Style>
+  <Style TargetType="Label"
+         BasedOn="{StaticResource baseControl}">
+  </Style>
+  <Style TargetType="ListBox"
+         BasedOn="{StaticResource baseControl}">
+  </Style>
+  <Style TargetType="ListView"
+         BasedOn="{StaticResource baseControl}">
+  </Style>
+  <Style TargetType="RadioButton"
+         BasedOn="{StaticResource baseControl}">
+    <Setter Property="VerticalAlignment"
+            Value="Center" />
+  </Style>
+  <Style TargetType="CheckBox"
+         BasedOn="{StaticResource baseControl}">
+    <Setter Property="VerticalAlignment"
+            Value="Center" />
+  </Style>
+  <!-- ****************************************** -->
+  <!-- Global Styles for "FrameworkElement" types -->
+  <!-- ****************************************** -->
+  <Style TargetType="FrameworkElement"
+         x:Key="baseFrameworkElement">
+    <Setter Property="Margin"
+            Value="4" />
+  </Style>
+  <Style TargetType="Panel"
+         BasedOn="{StaticResource baseFrameworkElement}">
+  </Style>
+  <Style TargetType="StackPanel"
+         BasedOn="{StaticResource baseFrameworkElement}">
+  </Style>
+  <Style TargetType="TextBlock"
+         BasedOn="{StaticResource baseFrameworkElement}">
+  </Style>
+  <Style TargetType="Image"
+         BasedOn="{StaticResource baseFrameworkElement}">
+  </Style>
+  <Style TargetType="DataGrid"
+         BasedOn="{StaticResource baseFrameworkElement}">
+  </Style>
+  <!-- ******************** -->
+  <!-- Special Keyed Styles -->
+  <!-- ******************** -->
+  <Style TargetType="Label"
+         x:Key="inverseLabel"
+         BasedOn="{StaticResource baseControl}">
+    <Setter Property="Foreground"
+            Value="White" />
+  </Style>
+  <Style TargetType="Border"
+         x:Key="infoMessageArea"
+         BasedOn="{StaticResource screenBorder}">
+    <Setter Property="HorizontalAlignment"
+            Value="Center" />
+    <Setter Property="VerticalAlignment"
+            Value="Center" />
+    <Setter Property="Padding"
+            Value="20" />
+    <Setter Property="BorderThickness"
+            Value="2" />
+    <Setter Property="BorderBrush"
+            Value="Gray" />
+  </Style>
+  <Style TargetType="Grid"
+         x:Key="contentAreaStyle">
+    <Setter Property="Margin"
+            Value="10" />
+    <Setter Property="HorizontalAlignment"
+            Value="Left" />
+    <Setter Property="VerticalAlignment"
+            Value="Top" />
+  </Style>
+  <Style TargetType="Border"
+         x:Key="minimizedBorderStyle">
+    <Setter Property="BorderBrush"
+            Value="Gray" />
+    <Setter Property="BorderThickness"
+            Value="0 1 0 0" />
+  </Style>
+  <Style TargetType="WrapPanel"
+         x:Key="minimizedAreaStyle">
+    <Setter Property="Margin"
+            Value="0" />
+    <Setter Property="HorizontalAlignment"
+            Value="Stretch" />
+    <Setter Property="Orientation"
+            Value="Horizontal" />
+  </Style>
+  <Style TargetType="TextBlock"
+         x:Key="statusAreaStyle">
+    <Setter Property="Margin"
+            Value="10,4" />
+  </Style>
+  <!-- ************* -->
+  <!-- Button Styles -->
+  <!-- ************* -->
+  <Style TargetType="Button"
+         x:Key="closeButton"
+         BasedOn="{StaticResource baseControl}">
+    <Setter Property="Padding"
+            Value="4,-2,4,1" />
+    <Setter Property="HorizontalAlignment"
+            Value="Right" />
+    <Setter Property="ToolTip"
+            Value="Close this Window" />
+  </Style>
+  <Style TargetType="Button"
+         x:Key="cancelButton"
+         BasedOn="{StaticResource baseControl}">
+    <Setter Property="Effect"
+            Value="{StaticResource buttonShadow}" />
+  </Style>
+  <Style TargetType="Button"
+         x:Key="submitButton"
+         BasedOn="{StaticResource cancelButton}">
+    <Setter Property="MinWidth"
+            Value="85" />
+  </Style>
+  <Style TargetType="Button"
+         x:Key="buttonWithImage">
+    <Setter Property="Height"
+            Value="24" />
+  </Style>
+  <!-- ********************* -->
+  <!-- Toolbar Button Styles -->
+  <!-- ********************* -->
+  <Style TargetType="Button"
+         x:Key="toolbarButton">
+    <Setter Property="Height"
+            Value="32" />
+  </Style>
+  <Style TargetType="StackPanel"
+         x:Key="toolbarButtonStackPanel">
+    <Setter Property="Margin"
+            Value="0" />
+  </Style>
+  <Style TargetType="Image"
+         x:Key="toolbarImage">
+    <Style.Triggers>
+      <Trigger Property="IsEnabled"
+               Value="False">
+        <Setter Property="Opacity"
+                Value="0.5" />
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <!-- **************************** -->
+  <!-- Validation Area Keyed Styles -->
+  <!-- **************************** -->
+  <Style TargetType="ListBox"
+         x:Key="validationArea"
+         BasedOn="{StaticResource baseControl}">
+    <Setter Property="BorderBrush"
+            Value="Red" />
+    <Setter Property="BorderThickness"
+            Value="2" />
+  </Style>
+  <!-- ********************** -->
+  <!-- Title Bar Keyed Styles -->
+  <!-- ********************** -->
+  <Style TargetType="Image"
+         x:Key="titleBarButton">
+    <Setter Property="Margin"
+            Value="0" />
+    <Setter Property="Height"
+            Value="24" />
+    <Setter Property="VerticalAlignment"
+            Value="Center" />
+  </Style>
+  <Style TargetType="TextBlock"
+         x:Key="titleBarTitle">
+    <Setter Property="VerticalAlignment"
+            Value="Center" />
+  </Style>
+  <Style TargetType="Border"
+         x:Key="titleBarBorder">
+    <Setter Property="VerticalAlignment"
+            Value="Top" />
+    <Setter Property="BorderBrush"
+            Value="Gray" />
+    <Setter Property="Margin"
+            Value="0" />
+    <Setter Property="BorderThickness"
+            Value="0 0 0 1" />
+  </Style>
+  <Style TargetType="StackPanel"
+         x:Key="titleBarButtonArea">
+    <Setter Property="Margin"
+            Value="0" />
+    <Setter Property="HorizontalAlignment"
+            Value="Right" />
+    <Setter Property="Orientation"
+            Value="Horizontal" />
+  </Style>
+  <!-- ********************** -->
+  <!-- Keyed Styles for App   -->
+  <!-- ********************** -->
+  <Style TargetType="Label"
+         x:Key="titleText">
+    <Setter Property="FontSize"
+            Value="22" />
+  </Style>
+  <Style TargetType="TextBox"
+         x:Key="resultText"
+         BasedOn="{StaticResource baseFrameworkElement}">
+    <Setter Property="FontSize"
+            Value="18" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+            Value="Auto" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+            Value="Auto" />
+  </Style>
+</ResourceDictionary>

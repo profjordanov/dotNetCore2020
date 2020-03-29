@@ -1,0 +1,59 @@
+﻿@model DataWrapper.Samples.ViewModelLayer.ProductViewModelBase
+
+@Html.HiddenFor(m => m.EventAction)
+@Html.HiddenFor(m => m.EventValue)
+@Html.HiddenFor(m => m.Entity.ProductCategoryID)
+@Html.HiddenFor(m => m.Entity.ProductModelID)
+@Html.HiddenFor(m => m.Entity.ModifiedDate)
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h1 class="panel-title">Product Detail</h1>
+  </div>
+  <div class="panel-body">
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.ProductID, "Product ID")
+      @Html.TextBoxFor(m => m.Entity.ProductID, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.Name, "Product Name")
+      @Html.TextBoxFor(m => m.Entity.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.ProductNumber, "Product Number")
+      @Html.TextBoxFor(m => m.Entity.ProductNumber, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.Color, "Color")
+      @Html.TextBoxFor(m => m.Entity.Color, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.Size, "Size")
+      @Html.TextBoxFor(m => m.Entity.Size, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.Weight, "Weight")
+      @Html.TextBoxFor(m => m.Entity.Weight, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.StandardCost, "Cost")
+      @Html.TextBoxFor(m => m.Entity.StandardCost, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.ListPrice, "Price")
+      @Html.TextBoxFor(m => m.Entity.ListPrice, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.SellStartDate, "Sell Start Date")
+      @Html.TextBoxFor(m => m.Entity.SellStartDate, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.SellEndDate, "Sell End Date")
+      @Html.TextBoxFor(m => m.Entity.SellEndDate, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+      @Html.LabelFor(m => m.Entity.DiscontinuedDate, "Discontinued Date")
+      @Html.TextBoxFor(m => m.Entity.DiscontinuedDate, new { @class = "form-control" })
+    </div>
+  </div>
+</div>

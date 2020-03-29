@@ -1,0 +1,152 @@
+﻿CREATE PROCEDURE [SalesLT].[Product_Get]
+	@ProductID int
+AS
+BEGIN
+	SELECT [ProductID],[Name],[ProductNumber],[Color],[StandardCost],[ListPrice],[Size],[Weight],[ProductCategoryID],[ProductModelID],[SellStartDate],[SellEndDate],[DiscontinuedDate],[ModifiedDate] 
+	FROM SalesLT.Product
+	WHERE ProductID = @ProductID;
+END
+GO
+
+
+CREATE PROCEDURE SalesLT.Product_GetAll
+AS
+BEGIN
+  SELECT [ProductID],[Name],[ProductNumber],[Color],[StandardCost],[ListPrice],[Size],[Weight],[ProductCategoryID],[ProductModelID],[SellStartDate],[SellEndDate],[DiscontinuedDate],[ModifiedDate] 
+  FROM SalesLT.Product;
+END
+GO
+
+CREATE PROCEDURE [SalesLT].[Product_GetAllWithOutput]
+	@Test nvarchar(10) OUTPUT
+AS
+BEGIN
+	SELECT *
+	FROM SalesLT.Product;
+
+	SELECT @Test = 'Hello';
+END
+GO
+
+CREATE PROCEDURE [SalesLT].[Product_Count]
+	@Name nvarchar(50) null,
+	@ProductNumber nvarchar(25) null,
+	@BeginningCost money null,
+	@EndingCost money null
+AS
+BEGIN
+	SELECT Count(*)
+	FROM SalesLT.Product
+  WHERE (@Name IS NULL OR Name LIKE @Name + '%') 
+  AND   (@ProductNumber IS NULL OR ProductNumber LIKE @ProductNumber + '%')
+  AND   (@BeginningCost IS NULL OR StandardCost >= @BeginningCost)
+	AND   (@EndingCost IS NULL OR StandardCost <= @EndingCost)
+END
+GO
+
+
+CREATE PROCEDURE [SalesLT].[Product_Search]
+	@Name nvarchar(50) null,
+	@ProductNumber nvarchar(25) null,
+	@BeginningCost money null,
+	@EndingCost money null
+AS
+BEGIN
+	SELECT [ProductID],[Name],[ProductNumber],[Color],[StandardCost],[ListPrice],[Size],[Weight],[ProductCategoryID],[ProductModelID],[SellStartDate],[SellEndDate],[DiscontinuedDate],[ModifiedDate] 
+	FROM SalesLT.Product
+  WHERE (@Name IS NULL OR Name LIKE @Name + '%') 
+  AND   (@ProductNumber IS NULL OR ProductNumber LIKE @ProductNumber + '%')
+  AND   (@BeginningCost IS NULL OR StandardCost >= @BeginningCost)
+	AND   (@EndingCost IS NULL OR StandardCost <= @EndingCost)
+END
+GO
+
+
+CREATE PROCEDURE SalesLT.Product_Insert
+	@Name nvarchar(50),
+	@ProductNumber nvarchar(25),
+	@Color nvarchar(15) null,
+	@StandardCost money,
+	@ListPrice money,
+	@Size nvarchar(5) null,
+	@Weight decimal(8,2) null,
+	@ProductCategoryID int null,
+	@ProductModelID int null,
+	@SellStartDate datetime,
+	@SellEndDate datetime null,
+	@DiscontinuedDate datetime null,
+	@ModifiedDate datetime,
+	@ProductID int OUTPUT
+AS
+BEGIN
+	INSERT INTO [SalesLT].[Product]
+			   ([Name]
+			   ,[ProductNumber]
+			   ,[Color]
+			   ,[StandardCost]
+			   ,[ListPrice]
+			   ,[Size]
+			   ,[Weight]
+			   ,[ProductCategoryID]
+			   ,[ProductModelID]
+			   ,[SellStartDate]
+			   ,[SellEndDate]
+			   ,[DiscontinuedDate]
+			   ,[ModifiedDate])
+		 VALUES
+			   (@Name,
+				@ProductNumber,
+				@Color,
+				@StandardCost,
+				@ListPrice,
+				@Size,
+				@Weight,
+				@ProductCategoryID,
+				@ProductModelID,
+				@SellStartDate,
+				@SellEndDate,
+				@DiscontinuedDate,
+				@ModifiedDate);
+
+	SELECT @ProductID = SCOPE_IDENTITY();
+END
+GO
+
+
+CREATE PROCEDURE [SalesLT].[Product_Update]
+	@Name nvarchar(50),
+	@ProductNumber nvarchar(25),
+	@Color nvarchar(15) null,
+	@StandardCost money,
+	@ListPrice money,
+	@Size nvarchar(5) null,
+	@Weight decimal(8,2) null,
+	@ProductCategoryID int null,
+	@ProductModelID int null,
+	@SellStartDate datetime,
+	@SellEndDate datetime null,
+	@DiscontinuedDate datetime null,
+	@ModifiedDate datetime,
+	@ProductID int
+AS
+BEGIN
+	UPDATE SalesLT.Product 
+	SET [Name]=@Name, ProductNumber=@ProductNumber, Color=@Color, 
+	    StandardCost=@StandardCost, ListPrice=@ListPrice, Size=@Size, 
+		[Weight]=@Weight, ProductCategoryID=@ProductCategoryID, 
+		ProductModelID=@ProductModelID, SellStartDate=@SellStartDate, 
+		SellEndDate=@SellEndDate, DiscontinuedDate=@DiscontinuedDate, 
+		ModifiedDate=@ModifiedDate 
+    WHERE ProductID = @ProductID
+END
+GO
+
+
+CREATE PROCEDURE [SalesLT].[Product_Delete]
+	@ProductID int
+AS
+BEGIN
+	DELETE FROM SalesLT.Product 
+    WHERE ProductID = @ProductID
+END
+GO

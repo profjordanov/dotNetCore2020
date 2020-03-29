@@ -1,0 +1,57 @@
+﻿@model DataWrapper.Samples.ViewModelLayer.ProductSPViewModel
+
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+  ViewBag.Title = "Modify";
+}
+
+<h1>Modify Product Data Using Stored Procedures</h1>
+
+@if (!string.IsNullOrEmpty(Model.ResultText)) {
+  <div class="row">
+    <div class="col-sm-12">
+      @Model.ResultText
+    </div>
+  </div>
+}
+
+@if (!string.IsNullOrEmpty(Model.LastExceptionMessage)) {
+  <div class="row">
+    <div class="col-sm-12">
+      @Model.LastExceptionMessage
+    </div>
+  </div>
+}
+
+@using (Html.BeginForm()) {
+  @Html.HiddenFor(m => m.EventAction)
+  @Html.HiddenFor(m => m.EventValue)
+
+  if (Model.RowsAffected > 0) {
+    <div class="row">
+      <div class="col-md-12">
+        <p>Total Count: @Model.RowsAffected</p>
+      </div>
+    </div>
+  }
+
+  <button class="btn btn-sm btn-primary"
+          data-pdsa-action="insert">
+    Insert Product
+  </button>
+  <button class="btn btn-sm btn-primary"
+          data-pdsa-action="update">
+    Update Product
+  </button>
+  <button class="btn btn-sm btn-primary"
+          data-pdsa-action="delete">
+    Delete Product
+  </button>
+  <a href="/Home/Index" class="btn btn-sm btn-primary">Cancel</a>
+
+  @Html.Partial("_ProductDetail")
+}
+
+@section scripts {
+  <script src="~/Scripts/pdsa-common.js"></script>
+}

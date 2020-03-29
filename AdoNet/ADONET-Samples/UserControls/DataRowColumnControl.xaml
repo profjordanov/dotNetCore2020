@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="ADONET_Samples.UserControls.DataRowColumnControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:ADONET_Samples.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="450"
+             d:DesignWidth="800">
+  <UserControl.Resources>
+    <vm:DataRowColumnViewModel x:Key="viewModel" />
+  </UserControl.Resources>
+  <Grid DataContext="{StaticResource viewModel}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Label Style="{StaticResource titleText}"
+           Content="DataRow/DataColumn Classes" />
+    <WrapPanel Grid.Row="1"
+                Orientation="Horizontal">
+      <Button Content="Build DataTable"
+              Click="BuildDataTable_Click" />
+      <Button Content="Clone DataTable Structure"
+              Click="CloneDataTable_Click" />
+      <Button Content="Copy DataTable Structure"
+              Click="CopyDataTable_Click" />
+      <Button Content="Select/Copy Row by Row"
+              Click="SelectUsingRowByRow_Click" />
+      <Button Content="Select/Copy Using CopyToDataTable"
+              Click="SelectUsingCopyToDataTable_Click" />
+    </WrapPanel>
+    <TextBox Grid.Row="2"
+             Grid.ColumnSpan="2"
+             Style="{StaticResource resultText}"
+             Text="{Binding Path=ResultText}" />
+    <DataGrid Grid.Row="3"
+              Grid.ColumnSpan="2"
+              Name="grdProducts"
+              ItemsSource="{Binding}" />
+  </Grid>
+</UserControl>

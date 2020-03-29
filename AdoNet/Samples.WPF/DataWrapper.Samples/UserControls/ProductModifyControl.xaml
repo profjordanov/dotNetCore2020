@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="DataWrapper.Samples.UserControls.ProductModifyControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:vm="clr-namespace:DataWrapper.Samples.ViewModelLayer;assembly=DataWrapper.Samples.ViewModelLayer"
+             xmlns:UserControls="clr-namespace:DataWrapper.Samples.UserControls"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             Style="{StaticResource screenStyle}">
+  <UserControl.Resources>
+    <vm:ProductViewModel x:Key="viewModel" />
+  </UserControl.Resources>
+  <Border Style="{StaticResource screenBorder}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+      <Grid DataContext="{Binding Source={StaticResource viewModel}}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+          <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0"
+               FontSize="24"
+               Content="Modify Product Data Using Dynamic SQL" />
+        <TextBlock Grid.Row="1"
+                   Text="{Binding Path=ResultText}" />
+        <Label Grid.Row="2"
+               Foreground="Red"
+               Background="White"
+               Content="{Binding Path=LastExceptionMessage}" />
+        
+        <UserControls:ProductDetail Grid.Row="3" />
+        
+        <WrapPanel Grid.Row="4">
+          <Button Content="Insert Product"
+                  Click="InsertButton_Click" />
+          <Button Content="Update Product"
+                  Click="UpdateButton_Click" />
+          <Button Content="Delete Product"
+                  Click="DeleteButton_Click" />
+          <Button Content="Transaction"
+                  Click="TransactionButton_Click" />
+        </WrapPanel>
+      </Grid>
+    </ScrollViewer>
+  </Border>
+</UserControl>
