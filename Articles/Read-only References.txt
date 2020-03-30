@@ -1,0 +1,61 @@
+Value Versus Reference
+
+There are two main types of argument passing in C#: reference and Value. C# also has the ability to define custom types, 
+but that is not in the scope of the guide. Value and reference types show different performance characteristics because of the nature of their implementation. Value types do not have any overhead in terms of memory because the data that you can store in a specific type like
+int, string, or double has a specific size. Reference types have two extra fields called ObjectHearder and MethodTable.
+
+ObjectHeader is used by the CLR to store additional information, and it's basically a bitmask. MethodTable is a pointer
+to the Method Table, which is a set of metadata about a specific type. Calling a method from an object makes
+the CLR jump to the Method Table and get the address of the method's implementation to perform the call.
+
+Structs
+
+Structs share a very similar syntax to classes. There is a restriction that tells you that the name must be a valid C# identifier name. 
+The restriction says the name can start with either a letter or the underscore (_) character.
+
+The limitations of structs include:
+
+Only static or const fields can be initialized during declaration.
+You cannot declare a finalizer, a.k.a. parameterless constructor.
+Structs are copied on assignment.
+Structs are value types, while classes are reference types.
+Structs can have constructors that accept parameters.
+Structs cannot inherit from another struct or class. They inherit from value types, which inherit from object types.
+Structs can have interfaces.
+Structs cannot be null, meaning they cannot assign any of their variables the null value unless they are declared as nullable.
+Let's see an example of a struct.
+
+public struct Device
+{
+    public string DeviceType { get; set; }
+    public string Name { get; set; }
+    public int Serial { get; set; }
+    public Device(string devicetype, string name, int serial)
+    {
+        DeviceType = devicetype;
+        Name = name;
+        Serial = serial;
+    }
+}
+
+The first difference we note is that the struct keyword is used at declaration. As a general rule of thumb, you need to remember that structs are basically data containers, and while classes can be data containers too, they are designed for something else. When you are in doubt, you need to decide whether you want to use value semantics or reference semantics in your application. The first comes from structs, the second comes from classes.
+
+This type of struct can be freely modified. You can change the Name, DeviceType and the Serial after instantiation. More tech-savvy people are also aware that you can even modify the content this and change it to another instance. In short, this struct is a mutable datastructure.
+
+Read-only Structs
+
+In order to transform our above struct to read-only, we need to do two things. First, we need to add the readonly keyword. But that alone is not enough. We also need to remove the set from the properties. If we do not, we get error.
+
+You need to be aware that this works because in this readonly case, the modification of the values is only allowed from the call of the constructor and only if the constructor has parameters.
+
+Consuming Read-only Structs
+
+There is a keyword we need to introduce, which is in. This allows us to pass an argument via a read-only reference. In C#, there are two ways to pass an argument: you either pass it by value or by reference. There are two more ways that are variants of the first, known as in and out. The out is actually a reference-based argument passing where the compiler additionally checks for a definite assignment. The in is also passed by reference with a very special attribute.
+
+This is set to true when using in to pass an argument, and the compiler will ensure that no assignment happens to the struct in that function definition where this argument is passed.
+
+This change in the language has two consequences:
+
+You cannot use in with iterator blocks or async methods.
+You cannot create overloads for your methods that are only different by in,ref or out.
+There is one bottleneck you need to be aware of. There is a defense mechanism that creates a copy of the parameter every time it is used. If the passed parameter is a struct and it's also read-only, this protection is removed. This means that you should never pass a read-only struct this way. It will degrade performance and remove protection as well.
