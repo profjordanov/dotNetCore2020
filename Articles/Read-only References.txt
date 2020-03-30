@@ -59,3 +59,52 @@ This change in the language has two consequences:
 You cannot use in with iterator blocks or async methods.
 You cannot create overloads for your methods that are only different by in,ref or out.
 There is one bottleneck you need to be aware of. There is a defense mechanism that creates a copy of the parameter every time it is used. If the passed parameter is a struct and it's also read-only, this protection is removed. This means that you should never pass a read-only struct this way. It will degrade performance and remove protection as well.
+
+Ref Read-only
+
+The ref keyword indicates to a function that the value is passed by reference. It can be used in multiple contexts. For example, it can be used in a method signature and method call to pass an argument to a method. Or it could be used in a method signature to return a value to the caller by reference, which is what is needed at this point. This keyword allows you to notify the caller that the returned object is immutable, and modification to the value is not possible.
+
+Take a look at this simple example before diving into read-only structs:
+
+namespace ABC
+{
+    public struct ClassRooms {
+        public ClassRooms(string name, int size) {
+            Name = name;
+            Size = size;
+            _currentUtilization = null;
+        }
+        private ClassRooms[] _currentUtilization;
+        public string Name { get; set; }
+        public int Size { get; set; }
+        public override string ToString()
+        {
+            return $"{this.Name} :: {this.Size}";
+        }
+        public void SetRoom(ClassRooms[] classrooms) => _currentUtilization = classrooms;
+        public ref readonly ClassRooms Getutilization(int x)
+        {
+            return ref _currentUtilization[x];
+        }
+    }
+      public class ComplexRefReadonly 
+    {                
+        public static void Main()
+        {
+            var Rooms = new ClassRooms[] { new ClassRooms("Mathematics", 20), new ClassRooms("Biologs", 15) };
+            var School = new ClassRooms();
+            School.SetRoom(Rooms);
+            Console.WriteLine(School.Getutilization(1));
+            Console.WriteLine(School.Getutilization(0));
+            Console.ReadKey();            
+        }
+    }
+}
+
+Here you have a struct called ClassRooms that represents the school. This struct is not read-only! Each classroom has a name and a size that need to be passed to the constructor. The ToString() function has been overridden to allow each classroom to be printed prettier. The key here is the following function:
+public ref readonly ClassRooms Getutilization(int x)
+{
+   return ref _currentUtilization[x];
+}
+
+This function returns a read-only copy of a specific classroom without modification, and protects the original values assigned during initialization. The Main() function is responsible for building up the school; first the array of Rooms variables is initialized, then the School, which is made up of rooms. Finally the Getutilization(<index>) function allows retrieval of a read-only copy of the given classroom.
