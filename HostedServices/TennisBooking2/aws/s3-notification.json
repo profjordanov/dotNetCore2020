@@ -1,0 +1,11 @@
+{
+    "TopicConfigurations": [
+      {
+        "Id": "s3-upload-notification-to-sns",
+        "TopicArn": "arn:aws:sns:eu-west-2:000000000000:new-score-doc-created",
+        "Events": [
+          "s3:ObjectCreated:*"
+        ]
+      }
+    ]
+  }

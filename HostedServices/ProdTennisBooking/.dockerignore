@@ -1,0 +1,12 @@
+.vs
+aws
+misc
+.dockerignore
+.env
+.git
+.gitignore
+docker-compose.yml
+**/bin
+**/obj
+*.sln.DotSettings
+*.md

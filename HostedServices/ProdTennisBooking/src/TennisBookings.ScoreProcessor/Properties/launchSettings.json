@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "TennisBookings.ScoreProcessor": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
