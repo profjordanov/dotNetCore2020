@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Time Off Request";
+}
+
+    <div class="form-container">
+
+
+        <h2>Time Off Request</h2>
+        @using (Html.BeginForm())
+        {
+
+            <label for="startDate">Starting Date</label>
+            <input type="date" name="startDate" />
+
+            <label for="endDate">End Date</label>
+            <input type="date" name="endDate" />
+
+            <label for="description">Reason</label>
+            <input type="text" name="description" placeholder="Time off purpose" />
+            
+            <input type="submit" name="submit" value="Submit" />
+
+        }
+    </div>
