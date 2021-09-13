@@ -1,0 +1,34 @@
+﻿<tr>
+    <td class="bold big">
+        @EventViewModel.Name
+    </td>
+    <td>
+        @EventViewModel.EventType
+    </td>
+    <td>
+        @EventViewModel.Date.ToLocalTime().Date.ToShortDateString()
+    </td>
+    <td>
+        @EventViewModel.Venue
+    </td>
+    <td class="bold big">
+        @EventViewModel.Capacity
+    </td>
+    <td class="bold big">
+        @EventViewModel.Sold
+    </td>
+    <td>
+        <SoldEdit EventViewModel="EventViewModel" OnConfirmed="@OnSoldConfirmed"/>
+    </td>
+</tr>
+
+@code {
+    private void OnSoldConfirmed(ListEventViewModel newEventViewModel)
+    {
+        EventViewModel = newEventViewModel;
+        StateHasChanged();
+    }
+
+    [Parameter]
+    public ListEventViewModel EventViewModel { get; set; }
+}

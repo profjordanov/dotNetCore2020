@@ -1,0 +1,43 @@
+﻿@if (Editing)
+{
+    <div>
+        <input id="sold" type="number" @bind="sold" @bind:event="oninput" placeholder="Enter sold" class="soldInput" />
+        <a class="btn-primary" type="button" @onclick="OnConfirmClick">CONFIRM @sold</a>
+    </div>
+}
+else
+{
+    <div style="width:10em">
+        <a class="btn-primary" type="button" @onclick="OnEditClick">EDIT SOLD</a>
+    </div>
+}
+
+@code {
+    bool Editing = false;
+    int sold = 0;
+    ListEventViewModel listEventViewModel;
+
+    [Parameter]
+    public ListEventViewModel EventViewModel {
+        set
+        {
+            listEventViewModel = value;
+            sold = value.Sold;
+        }
+    }
+
+    [Parameter]
+    public EventCallback<ListEventViewModel> OnConfirmed { get; set; }
+
+    public void OnEditClick()
+    {
+        Editing = true;
+    }
+
+    public async void OnConfirmClick()
+    {
+        Editing = false;
+        var newViewModel = listEventViewModel with { Sold = sold };
+        await OnConfirmed.InvokeAsync(newViewModel);
+    }
+}
