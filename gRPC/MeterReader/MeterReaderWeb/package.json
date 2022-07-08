@@ -14,7 +14,7 @@
     "jquery": "3.4.1",
     "jquery-validation": "1.19.5",
     "jquery-validation-unobtrusive": "3.2.11",
-    "moment": "2.29.2",
+    "moment": "2.29.4",
     "vee-validate": "3.0.8",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
