@@ -27,7 +27,7 @@
     "@vue/cli-service": "^5.0.8",
     "vue-cli-plugin-source-dir": "^0.1.0",
     "vue-template-compiler": "^2.6.10",
-    "gulp": "4.0.2",
+    "gulp": "5.0.0",
     "gulp-uglify": "3.0.2",
     "gulp-concat": "2.6.1"
   }
