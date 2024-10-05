@@ -8,7 +8,7 @@
     "watch": "vue-cli-service build --mode Development --watch"
   },
   "dependencies": {
-    "axios": "1.6.0",
+    "axios": "1.7.4",
     "bootstrap": "5.0.0",
     "core-js": "^2.6.5",
     "jquery": "3.5.0",
